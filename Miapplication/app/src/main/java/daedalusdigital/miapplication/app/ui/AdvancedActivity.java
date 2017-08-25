@@ -26,6 +26,7 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
+import daedalusdigital.miapplication.app.R;
 import daedalusdigital.miapplication.app.ui.drawerItems.CustomPrimaryDrawerItem;
 import daedalusdigital.miapplication.app.ui.drawerItems.CustomUrlPrimaryDrawerItem;
 import daedalusdigital.miapplication.app.ui.drawerItems.OverflowMenuDrawerItem;
@@ -38,10 +39,7 @@ public class AdvancedActivity extends AppCompatActivity {
     private Drawer result = null;
 
     private IProfile profile;
-    private IProfile profile2;
-    private IProfile profile3;
-    private IProfile profile4;
-    private IProfile profile5;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +52,7 @@ public class AdvancedActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(daedalusdigital.miapplication.app.R.string.drawer_item_home);
 
         // Create a few sample profile
-        profile = new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com").withIcon(getResources().getDrawable(daedalusdigital.miapplication.app.R.drawable.profile));
-        profile2 = new ProfileDrawerItem().withName("Max Muster").withEmail("max.mustermann@gmail.com").withIcon(getResources().getDrawable(daedalusdigital.miapplication.app.R.drawable.profile2)).withIdentifier(2);
-        profile3 = new ProfileDrawerItem().withName("Felix House").withEmail("felix.house@gmail.com").withIcon(getResources().getDrawable(daedalusdigital.miapplication.app.R.drawable.profile3));
-        profile4 = new ProfileDrawerItem().withName("Mr. X").withEmail("mister.x.super@gmail.com").withIcon(getResources().getDrawable(daedalusdigital.miapplication.app.R.drawable.profile4)).withIdentifier(4);
-        profile5 = new ProfileDrawerItem().withName("Batman").withEmail("batman@gmail.com").withIcon(getResources().getDrawable(daedalusdigital.miapplication.app.R.drawable.profile5));
-
+        profile = new ProfileDrawerItem().withName("Welcome King").withEmail("Welcome@outlook.com").withIcon(getResources().getDrawable(daedalusdigital.miapplication.app.R.drawable.profile));
         // Create the AccountHeader
         buildHeader(false, savedInstanceState);
 
@@ -72,19 +65,21 @@ public class AdvancedActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(daedalusdigital.miapplication.app.R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home),
                         //here we use a customPrimaryDrawerItem we defined in our sample app
                         //this custom DrawerItem extends the PrimaryDrawerItem so it just overwrites some methods
-                        new OverflowMenuDrawerItem().withName(daedalusdigital.miapplication.app.R.string.drawer_item_menu_drawer_item).withDescription(daedalusdigital.miapplication.app.R.string.drawer_item_menu_drawer_item_desc).withMenu(daedalusdigital.miapplication.app.R.menu.fragment_menu).withOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        new OverflowMenuDrawerItem().withName(R.string.drawer_item_mail).withMenu(daedalusdigital.miapplication.app.R.menu.fragment_menu).withOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
                                 Toast.makeText(AdvancedActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
                                 return false;
                             }
-                        }).withIcon(GoogleMaterial.Icon.gmd_filter_center_focus),
-                        new CustomPrimaryDrawerItem().withBackgroundRes(daedalusdigital.miapplication.app.R.color.accent).withName(daedalusdigital.miapplication.app.R.string.drawer_item_free_play).withIcon(FontAwesome.Icon.faw_gamepad),
-                        new PrimaryDrawerItem().withName(daedalusdigital.miapplication.app.R.string.drawer_item_custom).withDescription("This is a description").withIcon(FontAwesome.Icon.faw_eye),
-                        new CustomUrlPrimaryDrawerItem().withName(daedalusdigital.miapplication.app.R.string.drawer_item_fragment_drawer).withDescription(daedalusdigital.miapplication.app.R.string.drawer_item_fragment_drawer_desc).withIcon("https://avatars3.githubusercontent.com/u/1476232?v=3&s=460"),
-                        new SectionDrawerItem().withName(daedalusdigital.miapplication.app.R.string.drawer_item_section_header),
-                        new SecondaryDrawerItem().withName(daedalusdigital.miapplication.app.R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cart_plus),
-                        new SecondaryDrawerItem().withName(daedalusdigital.miapplication.app.R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_database).withEnabled(false),
+                        }).withIcon(GoogleMaterial.Icon.gmd_email),
+                        new CustomPrimaryDrawerItem().withBackgroundRes(daedalusdigital.miapplication.app.R.color.accent).withName(daedalusdigital.miapplication.app.R.string.drawer_item_news).withIcon(FontAwesome.Icon.faw_newspaper_o),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(FontAwesome.Icon.faw_briefcase),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_varsity).withIcon(FontAwesome.Icon.faw_building),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_tool).withIcon(FontAwesome.Icon.faw_plug),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_discover).withIcon(FontAwesome.Icon.faw_eye),
+                        new SectionDrawerItem(),
+                        new SecondaryDrawerItem().withName(daedalusdigital.miapplication.app.R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_desktop),
+                        new SecondaryDrawerItem().withName(daedalusdigital.miapplication.app.R.string.drawer_item_help).withDescription("This is a description").withIcon(FontAwesome.Icon.faw_database).withEnabled(false),
                         new SecondaryDrawerItem().withName(daedalusdigital.miapplication.app.R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github),
                         new SecondaryDrawerItem().withName(daedalusdigital.miapplication.app.R.string.drawer_item_contact).withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus).actionBar().paddingDp(5).colorRes(daedalusdigital.miapplication.app.R.color.material_drawer_dark_primary_text)).withTag("Bullhorn"),
                         new SecondaryDrawerItem().withName(daedalusdigital.miapplication.app.R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).withEnabled(false)
@@ -124,12 +119,8 @@ public class AdvancedActivity extends AppCompatActivity {
                 .withCompactStyle(compact)
                 .addProfiles(
                         profile,
-                        profile2,
-                        profile3,
-                        profile4,
-                        profile5,
                         //don't ask but google uses 14dp for the add account icon in gmail but 20dp for the normal icons (like manage account)
-                        new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new GitHub Account").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus).actionBar().paddingDp(5).colorRes(daedalusdigital.miapplication.app.R.color.material_drawer_dark_primary_text)).withIdentifier(PROFILE_SETTING),
+                        new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new Account").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus).actionBar().paddingDp(5).colorRes(daedalusdigital.miapplication.app.R.color.material_drawer_dark_primary_text)).withIdentifier(PROFILE_SETTING),
                         new ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings)
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
@@ -166,11 +157,6 @@ public class AdvancedActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case daedalusdigital.miapplication.app.R.id.menu_1:
-                //update the profile2 and set a new image.
-                profile2.withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_android).backgroundColorRes(daedalusdigital.miapplication.app.R.color.accent).sizeDp(48).paddingDp(4));
-                headerResult.updateProfileByIdentifier(profile2);
-                return true;
             case daedalusdigital.miapplication.app.R.id.menu_2:
                 //show the arrow icon
                 result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(false);
