@@ -33,6 +33,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 import com.mikepenz.materialize.util.UIUtils;
+import daedalusdigital.miapplication.app.R;
 
 public class MultiDrawerActivity extends AppCompatActivity {
 

@@ -11,7 +11,7 @@
 
 
         <activity
-            android:name=".ui.AdvancedActivity"
+            android:name=".ui.CrossfadeDrawerLayoutActvitiy"
             android:theme="@style/MaterialDrawerTheme.TranslucentStatus"
             android:screenOrientation="portrait">
             <intent-filter>
