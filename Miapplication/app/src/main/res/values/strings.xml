@@ -35,7 +35,7 @@
 
     <string name="drawer_item_menu_drawer_item">Menu Drawer Item</string>
     <string name="drawer_item_menu_drawer_item_desc">Sample menu item with overflow button</string>
-
+    <string name="action_toggle">Toggle Side Panel</string>
     <string name="drawer_item_home">Home</string>
     <string name="drawer_item_free_play">Free Play</string>
     <string name="drawer_item_custom">Custom</string>

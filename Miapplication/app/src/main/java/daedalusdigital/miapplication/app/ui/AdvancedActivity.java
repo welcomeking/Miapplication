@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+import android.support.v4.app.Fragment;
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
@@ -72,7 +73,7 @@ public class AdvancedActivity extends AppCompatActivity {
                                 return false;
                             }
                         }).withIcon(GoogleMaterial.Icon.gmd_email),
-                        new CustomPrimaryDrawerItem().withBackgroundRes(daedalusdigital.miapplication.app.R.color.accent).withName(daedalusdigital.miapplication.app.R.string.drawer_item_news).withIcon(FontAwesome.Icon.faw_newspaper_o),
+                        new CustomPrimaryDrawerItem().withBackgroundRes(R.drawable.background_gradient).withName(daedalusdigital.miapplication.app.R.string.drawer_item_news).withIcon(FontAwesome.Icon.faw_newspaper_o),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(FontAwesome.Icon.faw_briefcase),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_varsity).withIcon(FontAwesome.Icon.faw_building),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_tool).withIcon(FontAwesome.Icon.faw_plug),
@@ -150,6 +151,7 @@ public class AdvancedActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(daedalusdigital.miapplication.app.R.menu.main, menu);
+        menu.findItem(R.id.menu_1).setIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_sort).color(Color.WHITE).actionBar());
         return true;
     }
 

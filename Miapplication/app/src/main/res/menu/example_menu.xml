@@ -7,6 +7,13 @@
         android:title="Menu 1"
         app:showAsAction="never" />
 
+    <group android:id="@+id/md_menu_second_group">
+        <item
+            android:id="@+id/action_settings"
+            android:orderInCategory="100"
+            android:title="@string/action_settings"
+            app:showAsAction="ifRoom" />
+    </group>
     <group android:id="@id/material_drawer_menu_default_group">
         <item
             android:id="@+id/menu_2"
@@ -46,12 +53,5 @@
                     app:showAsAction="never" />
             </menu>
         </item>
-    </group>
-    <group android:id="@+id/md_menu_second_group">
-        <item
-            android:id="@+id/action_settings"
-            android:orderInCategory="100"
-            android:title="@string/action_settings"
-            app:showAsAction="ifRoom" />
     </group>
 </menu>

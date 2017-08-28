@@ -37,8 +37,7 @@ dependencies {
     compile('com.mikepenz:materialdrawer:5.9.5@aar') {
         transitive = true
     }
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    // used to showcase how to load images
+
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.bumptech.glide:glide:3.8.0'
 
@@ -56,6 +55,8 @@ dependencies {
         transitive = true
         exclude module: "fastadapter"
     }
+    compile 'com.airbnb.android:lottie:2.2.0'
+    'com.ramotion.paperonboarding:paper-onboarding:1.1.1'
 
     compile ('com.irozon.sneaker:sneaker:1.0.1')
     // icon fonts used inside the sample

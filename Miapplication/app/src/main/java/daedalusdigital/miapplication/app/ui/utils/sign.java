@@ -1,4 +1,4 @@
-package daedalusdigital.miapplication.app.ui.ui;
+package daedalusdigital.miapplication.app.ui.utils;
 
 import android.os.Bundle;
 import android.support.percent.PercentLayoutHelper;
@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import daedalusdigital.miapplication.app.R;
@@ -66,15 +67,12 @@ public class sign extends AppCompatActivity {
     }
 
     private void showSignupForm() {
-        PercentRelativeLayout.LayoutParams paramsLogin = (PercentRelativeLayout.LayoutParams) llSignin.getLayoutParams();
-        PercentLayoutHelper.PercentLayoutInfo infoLogin = paramsLogin.getPercentLayoutInfo();
-        infoLogin.widthPercent = 0.15f;
+        RelativeLayout.LayoutParams paramsLogin = (PercentRelativeLayout.LayoutParams) llSignin.getLayoutParams();
         llSignin.requestLayout();
 
 
-        PercentRelativeLayout.LayoutParams paramsSignup = (PercentRelativeLayout.LayoutParams) llSignup.getLayoutParams();
-        PercentLayoutHelper.PercentLayoutInfo infoSignup = paramsSignup.getPercentLayoutInfo();
-        infoSignup.widthPercent = 0.85f;
+        RelativeLayout.LayoutParams paramsSignup = (PercentRelativeLayout.LayoutParams) llSignup.getLayoutParams();
+ ;
         llSignup.requestLayout();
 
         tvSignupInvoker.setVisibility(View.GONE);
