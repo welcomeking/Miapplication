@@ -1,10 +1,13 @@
 package daedalusdigital.miapplication.app.ui;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,26 +22,31 @@ import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.holder.BadgeStyle;
+import com.mikepenz.materialdrawer.holder.ColorHolder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.Badgeable;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
-
+import com.mikepenz.materialdrawer.model.interfaces.Nameable;
+import com.mikepenz.materialdrawer.MiniDrawer;
 import daedalusdigital.miapplication.app.R;
 import daedalusdigital.miapplication.app.ui.drawerItems.CustomPrimaryDrawerItem;
-import daedalusdigital.miapplication.app.ui.drawerItems.CustomUrlPrimaryDrawerItem;
 import daedalusdigital.miapplication.app.ui.drawerItems.OverflowMenuDrawerItem;
 
 public class AdvancedActivity extends AppCompatActivity {
-    private static final int PROFILE_SETTING = 1;
+
 
     //save our header or result
-    private AccountHeader headerResult = null;
     private Drawer result = null;
-
+    private Drawer resultAppended = null;
+    private AccountHeader headerResult = null;
+    private static final int PROFILE_SETTING = 1;
+    private MiniDrawer miniResult = null;
     private IProfile profile;
 
 
@@ -63,7 +71,7 @@ public class AdvancedActivity extends AppCompatActivity {
                 .withToolbar(toolbar)
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName(daedalusdigital.miapplication.app.R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home),
+                        new PrimaryDrawerItem().withName(daedalusdigital.miapplication.app.R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home).withBadge("22").withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)),
                         //here we use a customPrimaryDrawerItem we defined in our sample app
                         //this custom DrawerItem extends the PrimaryDrawerItem so it just overwrites some methods
                         new OverflowMenuDrawerItem().withName(R.string.drawer_item_mail).withMenu(daedalusdigital.miapplication.app.R.menu.fragment_menu).withOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -99,10 +107,132 @@ public class AdvancedActivity extends AppCompatActivity {
                         new SecondaryDrawerItem().withName(daedalusdigital.miapplication.app.R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(10),
                         new SecondaryDrawerItem().withName(daedalusdigital.miapplication.app.R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github)
                 )
-                .withSavedInstance(savedInstanceState)
+
+                .withOnDrawerListener(new Drawer.OnDrawerListener() {
+                    @Override
+                    public void onDrawerOpened(View drawerView) {
+                        Toast.makeText(AdvancedActivity.this, "onDrawerOpened", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onDrawerClosed(View drawerView) {
+                        Toast.makeText(AdvancedActivity.this, "onDrawerClosed", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onDrawerSlide(View drawerView, float slideOffset) {
+
+                    }
+                })
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        //check if the drawerItem is set.
+                        //there are different reasons for the drawerItem to be null
+                        //--> click on the header
+                        //--> click on the footer
+                        //those items don't contain a drawerItem
+
+                        if (drawerItem != null) {
+                            if (drawerItem instanceof Nameable) {
+                                Toast.makeText(AdvancedActivity.this, ((Nameable) drawerItem).getName().getText(AdvancedActivity.this), Toast.LENGTH_SHORT).show();
+                            }
+
+                            if (drawerItem instanceof Badgeable) {
+                                Badgeable badgeable = (Badgeable) drawerItem;
+                                if (badgeable.getBadge() != null) {
+                                    int badge = Integer.valueOf(badgeable.getBadge().toString());
+                                    if (badge > 0) {
+                                        badgeable.withBadge(String.valueOf(badge - 1));
+                                        result.updateItem(drawerItem);
+                                    }
+                                }
+                            }
+                        }
+
+                        return false;
+                    }
+                })
+                .withOnDrawerItemLongClickListener(new Drawer.OnDrawerItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(View view, int position, IDrawerItem drawerItem) {
+                        if (drawerItem instanceof SecondaryDrawerItem) {
+                            Toast.makeText(AdvancedActivity.this, ((SecondaryDrawerItem) drawerItem).getName().getText(AdvancedActivity.this), Toast.LENGTH_SHORT).show();
+                        }
+                        return false;
+                    }
+                })
+                .withOnDrawerListener(new Drawer.OnDrawerListener() {
+                    @Override
+                    public void onDrawerOpened(View drawerView) {
+                        if (drawerView == result.getSlider()) {
+                            Log.e("sample", "left opened");
+                        } else if (drawerView == resultAppended.getSlider()) {
+                            Log.e("sample", "right opened");
+                        }
+                    }
+
+                    @Override
+                    public void onDrawerClosed(View drawerView) {
+                        if (drawerView == result.getSlider()) {
+                            Log.e("sample", "left closed");
+                        } else if (drawerView == resultAppended.getSlider()) {
+                            Log.e("sample", "right closed");
+                        }
+                    }
+
+                    @Override
+                    public void onDrawerSlide(View drawerView, float slideOffset) {
+
+                    }
+                })
                 .build();
 
 
+
+        resultAppended = new DrawerBuilder()
+                .withActivity(this)
+                .withToolbar(toolbar)
+                .withDrawerWidthDp(72)
+                .withHasStableIds(true)
+                .withGenerateMiniDrawer(true)
+                .addDrawerItems(
+                        new PrimaryDrawerItem().withIcon(FontAwesome.Icon.faw_envelope).withBadge("22").withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_compact_header).withIcon(GoogleMaterial.Icon.gmd_my_location).withIdentifier(1),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_action_bar_drawer).withIcon(GoogleMaterial.Icon.gmd_shopping_cart).withBadge("22").withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)).withIdentifier(2).withSelectable(false),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_multi_drawer).withIcon(FontAwesome.Icon.faw_taxi).withIdentifier(3),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_non_translucent_status_drawer).withIcon(FontAwesome.Icon.faw_play_circle).withIdentifier(4),
+                        new PrimaryDrawerItem().withDescription("A more complex sample").withName(R.string.drawer_item_advanced_drawer).withIcon(GoogleMaterial.Icon.gmd_alarm).withIdentifier(5),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_cloud),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withIcon(GoogleMaterial.Icon.gmd_account).withTag("Bullhorn"),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withIcon(GoogleMaterial.Icon.gmd_search).withTag("Bullhorn")
+                ) // add the items we want to use with our Drawer
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        if (drawerItem instanceof Nameable) {
+                            if (drawerItem != null) {
+                                if (drawerItem.getIdentifier() == 1) {
+                                    drawerItem.isSelected();
+                                }
+                            }
+                            Toast.makeText(AdvancedActivity.this, ((Nameable) drawerItem).getName().getText(AdvancedActivity.this), Toast.LENGTH_SHORT).show();
+                        }
+                        return false;
+                    }
+                })
+                .withSavedInstance(savedInstanceState)
+                .withDrawerGravity(Gravity.END)
+                .append(result);
+
+        miniResult = resultAppended.getMiniDrawer();
+    }
+    protected int getSelectedColor(Context ctx) {
+        return ColorHolder.color(getSelectedColor(), ctx, com.mikepenz.materialdrawer.R.attr.material_drawer_selected, com.mikepenz.materialdrawer.R.color.material_drawer_selected);
+    }
+
+    private com.mikepenz.materialize.holder.ColorHolder getSelectedColor() {
+        return null;
     }
 
     /**
@@ -151,7 +281,7 @@ public class AdvancedActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(daedalusdigital.miapplication.app.R.menu.main, menu);
-        menu.findItem(R.id.menu_1).setIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_sort).color(Color.WHITE).actionBar());
+        menu.findItem(R.id.menu_1).setIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_account).color(Color.WHITE).actionBar());
         return true;
     }
 

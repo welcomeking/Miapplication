@@ -10,8 +10,8 @@
 
     <style name="CustomTheme" parent="MaterialDrawerTheme.TranslucentStatus">
         <!-- ...and here we setting appcompat’s color theme attrs -->
-        <item name="colorPrimary">#F1433C</item>
-        <item name="colorPrimaryDark">#D03033</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">#02A8F3</item>
 
         <!-- MaterialDrawer specific values -->
@@ -21,9 +21,9 @@
         </item>
         <item name="material_drawer_hint_text">@color/material_drawer_dark_hint_text</item>
         <item name="material_drawer_divider">@color/material_drawer_dark_divider</item>
-        <item name="material_drawer_selected">@color/material_drawer_dark_selected</item>
-        <item name="material_drawer_selected_text">#F1433C</item>
+        <item name="material_drawer_selected_text">#fff</item>
         <item name="material_drawer_header_selection_text">
+            <item name="material_drawer_selected">@drawable.background_gradient</item>
             @color/material_drawer_dark_primary_text
         </item>
 

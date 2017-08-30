@@ -2,19 +2,15 @@ package daedalusdigital.miapplication.app.ui.activities;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-
 import com.ramotion.paperonboarding.PaperOnboardingFragment;
 import com.ramotion.paperonboarding.PaperOnboardingPage;
 import com.ramotion.paperonboarding.listeners.PaperOnboardingOnRightOutListener;
-
 import java.util.ArrayList;
 
 import daedalusdigital.miapplication.app.R;
-import daedalusdigital.miapplication.app.ui.AdvancedActivity;
 
 public class WelcomeFragmentsActivity extends AppCompatActivity {
 
