@@ -1,4 +1,4 @@
-package daedalusdigital.miapplication.app.ui;
+package daedalusdigital.miapplication.app.ui.activities;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -13,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-import android.support.v4.app.Fragment;
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
@@ -193,29 +192,24 @@ public class AdvancedActivity extends AppCompatActivity {
         resultAppended = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
-                .withDrawerWidthDp(72)
+                .withDrawerWidthDp(70)
                 .withHasStableIds(true)
-                .withGenerateMiniDrawer(true)
                 .addDrawerItems(
                         new PrimaryDrawerItem().withIcon(FontAwesome.Icon.faw_envelope).withBadge("22").withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_compact_header).withIcon(GoogleMaterial.Icon.gmd_my_location).withIdentifier(1),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_action_bar_drawer).withIcon(GoogleMaterial.Icon.gmd_shopping_cart).withBadge("22").withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)).withIdentifier(2).withSelectable(false),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_multi_drawer).withIcon(FontAwesome.Icon.faw_taxi).withIdentifier(3),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_non_translucent_status_drawer).withIcon(FontAwesome.Icon.faw_play_circle).withIdentifier(4),
-                        new PrimaryDrawerItem().withDescription("A more complex sample").withName(R.string.drawer_item_advanced_drawer).withIcon(GoogleMaterial.Icon.gmd_alarm).withIdentifier(5),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_cloud),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withIcon(GoogleMaterial.Icon.gmd_account).withTag("Bullhorn"),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withIcon(GoogleMaterial.Icon.gmd_search).withTag("Bullhorn")
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(GoogleMaterial.Icon.gmd_my_location).withIdentifier(1),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(GoogleMaterial.Icon.gmd_shopping_cart).withBadge("22").withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)).withIdentifier(2).withSelectable(false),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(FontAwesome.Icon.faw_gamepad).withIdentifier(3),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(FontAwesome.Icon.faw_play_circle).withIdentifier(4),
+                        new PrimaryDrawerItem().withDescription("A more complex sample").withName(R.string.drawer_item_jobs).withIcon(GoogleMaterial.Icon.gmd_alarm).withIdentifier(5),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(FontAwesome.Icon.faw_cloud),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(GoogleMaterial.Icon.gmd_account).withTag("Bullhorn"),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(GoogleMaterial.Icon.gmd_search).withTag("Bullhorn"),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(FontAwesome.Icon.faw_picture_o).withTag("Bullhorn")
                 ) // add the items we want to use with our Drawer
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if (drawerItem instanceof Nameable) {
-                            if (drawerItem != null) {
-                                if (drawerItem.getIdentifier() == 1) {
-                                    drawerItem.isSelected();
-                                }
-                            }
                             Toast.makeText(AdvancedActivity.this, ((Nameable) drawerItem).getName().getText(AdvancedActivity.this), Toast.LENGTH_SHORT).show();
                         }
                         return false;
@@ -224,8 +218,6 @@ public class AdvancedActivity extends AppCompatActivity {
                 .withSavedInstance(savedInstanceState)
                 .withDrawerGravity(Gravity.END)
                 .append(result);
-
-        miniResult = resultAppended.getMiniDrawer();
     }
     protected int getSelectedColor(Context ctx) {
         return ColorHolder.color(getSelectedColor(), ctx, com.mikepenz.materialdrawer.R.attr.material_drawer_selected, com.mikepenz.materialdrawer.R.color.material_drawer_selected);
@@ -280,8 +272,10 @@ public class AdvancedActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(daedalusdigital.miapplication.app.R.menu.main, menu);
-        menu.findItem(R.id.menu_1).setIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_account).color(Color.WHITE).actionBar());
+        inflater.inflate(daedalusdigital.miapplication.app.R.menu.main, menu) ;
+
+        menu.findItem(R.id.action_settings).setIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_search).color(Color.WHITE).actionBar());
+        menu.findItem(R.id.menu_1).setIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_sort).color(Color.WHITE).actionBar());
         return true;
     }
 

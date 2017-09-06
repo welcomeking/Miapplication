@@ -11,15 +11,23 @@
 
 
         <activity
-            android:name=".ui.AdvancedActivity"
-            android:theme="@style/CustomTheme"
-            android:screenOrientation="portrait">
+            android:name=".ui.activities.PileActivity"
+            android:theme="@style/CustomTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activities.PatternLockActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activities.SlideActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activities.DetailActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activities.WelcomeFragmentsActivity"
             android:screenOrientation="portrait"/>
