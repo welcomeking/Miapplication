@@ -1,8 +1,10 @@
 package daedalusdigital.miapplication.app.ui.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.alium.nibo.placepicker.NiboPlacePickerActivity;
+import com.alium.nibo.utils.NiboStyle;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -36,6 +40,7 @@ import com.mikepenz.materialdrawer.MiniDrawer;
 import daedalusdigital.miapplication.app.R;
 import daedalusdigital.miapplication.app.ui.drawerItems.CustomPrimaryDrawerItem;
 import daedalusdigital.miapplication.app.ui.drawerItems.OverflowMenuDrawerItem;
+import daedalusdigital.miapplication.app.ui.fragment.DrawerFragment;
 
 public class AdvancedActivity extends AppCompatActivity {
 
@@ -52,13 +57,17 @@ public class AdvancedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(daedalusdigital.miapplication.app.R.layout.activity_sample);
+        setContentView(daedalusdigital.miapplication.app.R.layout.activity_sample_fragment_dark_toolbar);
 
         // Handle Toolbar
         Toolbar toolbar = (Toolbar) findViewById(daedalusdigital.miapplication.app.R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(daedalusdigital.miapplication.app.R.string.drawer_item_home);
 
+        if (savedInstanceState == null) {
+            Fragment f = DrawerFragment.newInstance("lol");
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
+        }
         // Create a few sample profile
         profile = new ProfileDrawerItem().withName("Welcome King").withEmail("Welcome@outlook.com").withIcon(getResources().getDrawable(daedalusdigital.miapplication.app.R.drawable.profile));
         // Create the AccountHeader
@@ -197,13 +206,13 @@ public class AdvancedActivity extends AppCompatActivity {
                 .addDrawerItems(
                         new PrimaryDrawerItem().withIcon(FontAwesome.Icon.faw_envelope).withBadge("22").withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(GoogleMaterial.Icon.gmd_my_location).withIdentifier(1),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(GoogleMaterial.Icon.gmd_shopping_cart).withBadge("22").withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)).withIdentifier(2).withSelectable(false),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(GoogleMaterial.Icon.gmd_shopping_cart).withBadge("22").withBadgeStyle(new BadgeStyle(Color.RED, Color.RED)).withIdentifier(2),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(FontAwesome.Icon.faw_gamepad).withIdentifier(3),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(FontAwesome.Icon.faw_play_circle).withIdentifier(4),
                         new PrimaryDrawerItem().withDescription("A more complex sample").withName(R.string.drawer_item_jobs).withIcon(GoogleMaterial.Icon.gmd_alarm).withIdentifier(5),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(FontAwesome.Icon.faw_cloud),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(GoogleMaterial.Icon.gmd_account).withTag("Bullhorn"),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(GoogleMaterial.Icon.gmd_search).withTag("Bullhorn"),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(FontAwesome.Icon.faw_cloud).withIdentifier(6),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(GoogleMaterial.Icon.gmd_account).withTag("Bullhorn").withIdentifier(7),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(GoogleMaterial.Icon.gmd_search).withTag("Bullhorn").withIdentifier(8),
                         new SecondaryDrawerItem().withName(R.string.drawer_item_jobs).withIcon(FontAwesome.Icon.faw_picture_o).withTag("Bullhorn")
                 ) // add the items we want to use with our Drawer
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -211,6 +220,10 @@ public class AdvancedActivity extends AppCompatActivity {
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         if (drawerItem instanceof Nameable) {
                             Toast.makeText(AdvancedActivity.this, ((Nameable) drawerItem).getName().getText(AdvancedActivity.this), Toast.LENGTH_SHORT).show();
+                        }
+                        if(drawerItem.equals(2)){
+                            Fragment f = new SlideActivity();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
                         }
                         return false;
                     }
@@ -252,7 +265,7 @@ public class AdvancedActivity extends AppCompatActivity {
                         //sample usage of the onProfileChanged listener
                         //if the clicked item has the identifier 1 add a new profile ;)
                         if (profile instanceof IDrawerItem && ((IDrawerItem) profile).getIdentifier() == PROFILE_SETTING) {
-                            IProfile newProfile = new ProfileDrawerItem().withNameShown(true).withName("Batman").withEmail("batman@gmail.com").withIcon(getResources().getDrawable(daedalusdigital.miapplication.app.R.drawable.profile5));
+                            IProfile newProfile = new ProfileDrawerItem().withNameShown(true).withName("Batman").withEmail("batman@gmail.com").withIcon(getResources().getDrawable(daedalusdigital.miapplication.app.R.drawable.profile));
                             if (headerResult.getProfiles() != null) {
                                 //we know that there are 2 setting elements. set the new profile above them ;)
                                 headerResult.addProfile(newProfile, headerResult.getProfiles().size() - 2);

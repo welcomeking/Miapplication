@@ -11,7 +11,7 @@
 
 
         <activity
-            android:name=".ui.activities.PileActivity"
+            android:name=".ui.activities.DetailActivity"
             android:theme="@style/CustomTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,13 +20,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.activities.PileActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".ui.activities.PatternLockActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activities.SlideActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.activities.DetailActivity"
+            android:name=".ui.activities.AdvancedActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activities.WelcomeFragmentsActivity"
