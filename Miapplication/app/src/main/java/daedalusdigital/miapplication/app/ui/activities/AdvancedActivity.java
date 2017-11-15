@@ -15,7 +15,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import com.alium.nibo.placepicker.NiboPlacePickerActivity;
 import com.alium.nibo.utils.NiboStyle;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
@@ -52,6 +54,8 @@ public class AdvancedActivity extends AppCompatActivity {
     private static final int PROFILE_SETTING = 1;
     private MiniDrawer miniResult = null;
     private IProfile profile;
+
+    private FragmentManager fragmentManager;
 
 
     @Override
@@ -222,7 +226,7 @@ public class AdvancedActivity extends AppCompatActivity {
                             Toast.makeText(AdvancedActivity.this, ((Nameable) drawerItem).getName().getText(AdvancedActivity.this), Toast.LENGTH_SHORT).show();
                         }
                         if(drawerItem.equals(2)){
-                            Fragment f = new SlideActivity();
+                            Fragment f = new DrawerFragment();
                             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
                         }
                         return false;
@@ -247,7 +251,8 @@ public class AdvancedActivity extends AppCompatActivity {
      * @param compact
      * @param savedInstanceState
      */
-    private void buildHeader(boolean compact, Bundle savedInstanceState) {
+    private void buildHeader(boolean compact, Bundle savedInstanceState)
+    {
         // Create the AccountHeader
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)

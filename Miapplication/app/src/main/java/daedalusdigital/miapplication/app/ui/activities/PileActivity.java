@@ -58,7 +58,6 @@ public class PileActivity extends AppCompatActivity {
         timeView = (VerticalTransitionLayout) findViewById(R.id.timeView);
         bottomView = (FadeTransitionImageView) findViewById(R.id.bottomImageView);
 
-        // 1. 状态栏侵入
         boolean adjustStatusHeight = false;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             adjustStatusHeight = true;
@@ -69,7 +68,7 @@ public class PileActivity extends AppCompatActivity {
             }
         }
 
-        // 2. 状态栏占位View的高度调整
+
         String brand = Build.BRAND;
         if (brand.contains("Xiaomi")) {
             Utils.setXiaomiDarkMode(this);
@@ -81,7 +80,7 @@ public class PileActivity extends AppCompatActivity {
             adjustStatusHeight = false;
         }
         if (adjustStatusHeight) {
-            adjustStatusBarHeight(); // 调整状态栏高度
+            adjustStatusBarHeight();
         }
 
         animatorListener = new Animator.AnimatorListener() {
@@ -111,7 +110,7 @@ public class PileActivity extends AppCompatActivity {
         };
 
 
-        // 3. PileLayout绑定Adapter
+
         initDataList();
         pileLayout.setAdapter(new PileLayout.Adapter() {
             @Override
@@ -192,9 +191,6 @@ public class PileActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * 从asset读取文件json数据
-     */
     private void initDataList() {
         dataList = new ArrayList<>();
         try {
@@ -220,9 +216,7 @@ public class PileActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * 属性动画
-     */
+
     public void setTransitionValue(float transitionValue) {
         this.transitionValue = transitionValue;
         countryView.duringAnimation(transitionValue);

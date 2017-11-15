@@ -83,7 +83,6 @@ dependencies {
     compile 'com.ramotion.paperonboarding:paper-onboarding:1.1.1'
     compile 'com.ramotion.foldingcell:folding-cell:1.2.1'
 
-    compile 'com.anjlab.android.iab.v3:library:1.0.+'
     compile 'net.steamcrafted:materialiconlib:1.0.3'
     compile 'de.Maxr1998:track-selector-lib:1.2'
 
@@ -91,6 +90,7 @@ dependencies {
     compile 'com.afollestad.material-dialogs:commons:0.9.0.2'
 //google
     compile 'com.github.aliumujib:Nibo:v1.02'
+    compile 'net.bohush.geometricprogressview:geometricprogressview:1.1.1'
     compile 'com.google.android.gms:play-services-auth:11.0.4'
     compile 'pub.devrel:easypermissions:0.3.0'
     compile('com.google.api-client:google-api-client-android:1.22.0') {

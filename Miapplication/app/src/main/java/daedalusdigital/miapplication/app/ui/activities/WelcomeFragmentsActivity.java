@@ -2,6 +2,7 @@ package daedalusdigital.miapplication.app.ui.activities;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -31,7 +32,10 @@ public class WelcomeFragmentsActivity extends AppCompatActivity {
         onBoardingFragment.setOnRightOutListener(new PaperOnboardingOnRightOutListener() {
             @Override
             public void onRightOut() {
-
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Fragment bf = new BlankFragment();
+                fragmentTransaction.replace(R.id.fragment_container, bf);
+                fragmentTransaction.commit();
             }
         });
     }
