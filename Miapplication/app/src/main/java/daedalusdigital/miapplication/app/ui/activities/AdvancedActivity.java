@@ -42,6 +42,7 @@ import com.mikepenz.materialdrawer.MiniDrawer;
 import daedalusdigital.miapplication.app.R;
 import daedalusdigital.miapplication.app.ui.drawerItems.CustomPrimaryDrawerItem;
 import daedalusdigital.miapplication.app.ui.drawerItems.OverflowMenuDrawerItem;
+import daedalusdigital.miapplication.app.ui.fragment.DemoFragment;
 import daedalusdigital.miapplication.app.ui.fragment.DrawerFragment;
 
 public class AdvancedActivity extends AppCompatActivity {
@@ -226,7 +227,7 @@ public class AdvancedActivity extends AppCompatActivity {
                             Toast.makeText(AdvancedActivity.this, ((Nameable) drawerItem).getName().getText(AdvancedActivity.this), Toast.LENGTH_SHORT).show();
                         }
                         if(drawerItem.equals(2)){
-                            Fragment f = new DrawerFragment();
+                            Fragment f = new BlankFragment();
                             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).commit();
                         }
                         return false;

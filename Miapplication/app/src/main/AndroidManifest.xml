@@ -11,7 +11,7 @@
 
 
         <activity
-            android:name=".ui.activities.SlideActivity"
+            android:name=".ui.activities.AdvancedActivity"
             android:theme="@style/CustomTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +26,7 @@
             android:name=".ui.activities.PatternLockActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.activities.AdvancedActivity"
+            android:name=".ui.activities.SlideActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activities.WelcomeFragmentsActivity"
